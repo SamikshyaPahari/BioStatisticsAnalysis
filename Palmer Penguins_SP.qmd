@@ -1,0 +1,23 @@
+---
+title: "Palmer Penguins"
+format: html
+execute:
+  keep-md: true
+---
+
+# Palmer Penguins
+
+This is the initial analysis of palmer datasets.
+
+```{r}
+#Load the tidyverse
+library (tidyverse)
+
+#Read the penguins_sampl data file from github
+penguins <- read_csv("https://raw.githubusercontent.com/mcduryea/Intro-to-Bioinformatics/main/data/penguins_samp1.csv")
+
+#See the first six rows of the data we've read in to our notebook
+penguins %>% head()
+```
+
+I see categorical data which are species name, island, and sex and numerical data which are bill length in mm, bill depth in mm, flipper length, body mass and year. There are 6 rows and 8 columns.

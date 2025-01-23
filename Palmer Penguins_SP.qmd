@@ -21,3 +21,317 @@ penguins %>% head()
 ```
 
 I see categorical data which are species name, island, and sex and numerical data which are bill length in mm, bill depth in mm, flipper length, body mass and year. There are 6 rows and 8 columns.
+
+## Data Manipulation
+
+We'll be using R code to manipulate the data. We'll learn how to filter rows, subset columns, group data, and compute summary statistics.
+
+-   How does bill length and bill depth differ overtime?
+
+-   Comparison of body mass of the species.
+
+```{r}
+penguins %>%
+  count(island)
+```
+
+-   There are 3 islands; Biscoe, Dream and Torgersen with numbers 36,3, and 5 respectively.
+
+```{r}
+penguins %>%
+  count(species)
+```
+
+-   There are 3 species in the island; Adelie, Chinstrap, and Gentoo with numbers 9,2, and 33 respectively.
+
+```{r}
+penguins %>% count (island, species)
+```
+
+This shows the number of species found in each island.
+
+```{r}
+penguins %>%
+  count(island, species) %>%
+  pivot_wider(names_from = species, values_from = n, values_fill = 0)
+```
+
+```{r}
+penguins %>%
+  count(island, species) %>%
+  pivot_wider(names_from = species, values_from = n, values_fill = 0) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("hover", "striped"))
+```
+
+```{r}
+install.packages("kableExtra")
+library(kableExtra)
+```
+
+```{r}
+penguins %>%
+  count(island, species) %>%
+  pivot_wider(names_from = species, values_from = n, values_fill = 0) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("hover", "striped"))
+```
+
+```{r}
+penguins %>%
+  summarize(mean_bill_length_mm = mean(bill_length_mm))
+```
+
+```{r}
+penguins %>%
+  summarize(mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE))
+```
+
+```{r}
+penguins %>%
+  summarize(
+    min_bill_length = min(bill_length_mm, na.rm = TRUE),
+    first_quartile_bill_length = quantile(bill_length_mm, 0.25, na.rm = TRUE),
+    median_bill_length = median(bill_length_mm, na.rm = TRUE),
+    mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE),
+    third_quartile_bill_length = quantile(bill_length_mm, 0.75, na.rm = TRUE),
+    standard_deviation_bill_length = sd(bill_length_mm, na.rm = TRUE)
+    ) %>%
+  pivot_longer(cols = everything())
+```
+
+```{r}
+penguins %>%
+  summarize(
+    min_bill_length = min(bill_length_mm, na.rm = TRUE),
+    first_quartile_bill_length = quantile(bill_length_mm, 0.25, na.rm = TRUE),
+    median_bill_length = median(bill_length_mm, na.rm = TRUE),
+    mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE),
+    third_quartile_bill_length = quantile(bill_length_mm, 0.75, na.rm = TRUE),
+    standard_deviation_bill_length = sd(bill_length_mm, na.rm = TRUE)
+    ) 
+```
+
+-   This is after removing pipe and pivot_longer to see how the data looks like. It looks less organized and less formatted.
+
+```{r}
+penguins %>%
+  summarize(
+    min_bill_length = min(bill_length_mm, na.rm = TRUE),
+    first_quartile_bill_length = quantile(bill_length_mm, 0.25, na.rm = TRUE),
+    median_bill_length = median(bill_length_mm, na.rm = TRUE),
+    mean_bill_length_mm = mean(bill_length_mm, na.rm = TRUE),
+    third_quartile_bill_length = quantile(bill_length_mm, 0.75, na.rm = TRUE),
+    standard_deviation_bill_length = sd(bill_length_mm, na.rm = TRUE)
+    ) %>%
+  pivot_longer(cols = everything()) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("hover", "striped"))
+```
+
+-   Using kable
+
+```{r}
+penguins %>%
+  select(species, island, sex, year)
+```
+
+```{r}
+penguins %>%
+  select(species, island, sex, year) %>%
+  filter(species == "Chinstrap")
+```
+
+```{r}
+chinstraps <- penguins %>%
+  select(species, island, sex, year) %>%
+  filter(species == "Chinstrap") %>%
+  select(-species)
+
+chinstraps %>%
+  head()
+```
+
+```{r}
+penguins %>%
+  group_by(species) %>%
+  summarise(
+    mean_bill_depth_mm = mean(bill_depth_mm, na.rm = TRUE),
+    sd_bill_depth_mm = sd(bill_depth_mm, na.rm = TRUE)
+  )
+```
+
+-   Average bill depth for the species listed in the data; Adelie - 17.8, Chinstrap - 18.8, and Gentoo - 15.2
+
+-   Standard deviation shows how much bill depth deviates from the mean of the bill depth. It does not deviate much for Adelie or Gentoo but it is higher for Chinstrap which has standard deviation of 1.4.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = species)) +
+  labs(title ="Counts of Penguin Species",
+       x = "Species", y = "Count")
+```
+
+-   \+ in ggplot adds component.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = island)) +
+  labs(title ="Counts of Island",
+       x = "Island", y = "Count")
+```
+
+This graph shows how many islands are listed in the data table.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_histogram(mapping = aes(x = bill_length_mm),
+                 color = "white",
+                 fill = "blue") +
+  labs(title ="Distribution of Bill Lengths",
+       x = "Bill Length (mm)", y = "Count")
+```
+
+This compares the bill length of different species and it shows that most of the species has bill length of 45.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = bill_length_mm),
+                 color = "white",
+                 fill = "blue") +
+  labs(title ="Distribution of Bill Lengths",
+       x = "Bill Length (mm)", y = "Count")
+```
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_density(mapping = aes(x = bill_length_mm),
+                 color = "white",
+                 fill = "blue") +
+  labs(title ="Distribution of Bill Lengths",
+       x = "Bill Length (mm)", y = "Count")
+```
+
+geom_density makes it smoother and easier to read with the curves than histogram.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_point(mapping = aes(x = bill_depth_mm, y = bill_length_mm)) +
+  labs(title = "Bill Depth and Length",
+       x = "Bill Depth (mm)",
+       y = "Bill Length (mm)")
+```
+
+Looking at the plot above, in most of the cases it seems like smaller bill depth has longer bill length.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_point(mapping = aes(x = body_mass_g, y = bill_depth_mm)) +
+  labs(title = "Bill Depth and Length",
+       x = "Body mass (g)",
+       y = "Bill depth (mm)")
+```
+
+It seems like higher the body mass, less would be the depth of the bill.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = island, fill = species)) +
+  labs(title = "Species by Island",
+       x = "Island",
+       y = "Species")
+```
+
+Biscoe island has a lot of species dominated by Gentoo while Dream island has less species than other island with Adelie and Chinstrap. Torgersen island has only Adelie.
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = bill_depth_mm, y = species)) +
+  labs(title = "Bill Depth by Species",
+       x = "Bill Depth (mm)",
+       y = "")
+```
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_histogram(mapping = aes(x = bill_depth_mm)) +
+  facet_wrap(~species, ncol = 1) +
+  labs(title = "Bill Depth by Species",
+       x = "Bill Depth (mm)",
+       y = "")
+```
+
+-   From the boxplot, we can see that the bill depth of Gentoo is smaller than other 2 species followed by Adelie and Chinstrap.
+
+-   Unlike boxplot that shows the summary of the data, Histogram shows all the data. Gentoo has smaller bill depth followed by Adelie and Chinstrap. But the data don't have a lot of number of Chinstrap unlike Gentoo and Adelie.
+
+```{r}
+penguins %>%
+  filter(!is.na(sex)) %>%
+  ggplot() +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = flipper_length_mm,
+                           color = species,
+                           shape = sex)) +
+  geom_smooth(mapping = aes(x = bill_length_mm,
+                            y = flipper_length_mm,
+                            color = species),
+              method = "lm") +
+  facet_grid(island ~ sex, scales = "free") +
+  labs(title = "Flipper and Bill Lengths by Species and Sex",
+       x = "Bill Length (mm)",
+       y = "Flipper Length(mm)") +
+  theme_light()
+```
+
+-   For female, Gentoo has longer flipper length with the average of 210mm. Adelie varies from 190mm-200mm, so some of them has longer flipper length and some of them has shorter flipper length. Chinstrap is in the middle of Adelie and Gento with 190mm-200mm.
+
+-   Bill length for Gentoo is longer, followed by Adelie and Chinstrap.
+
+-   For male as well similar to female, Gentoo has longer flipper length with some of the Adelie being longer than Chinstrap and some of them shorter than Chinstrap and Chinstrap in the middle. Also, bill length for Gentoo is longer, followed by Adelie and Chinstrap.
+
+-   Comparing two plots, it seems like male Gentoo has longer flipper length, male and female Adelie has similar flipper length, and male Chinstrap also has longer flipper length than female. Also, on average male bill length is longer than female bill length.
+
+-   Using geom_point, different shapes were used to represent male and female. Filter was used to filter out sex from the data table. Labs was used to give the title to the graph, and what x and y represent.
+
+```{r}
+penguins %>%
+  filter(!is.na(sex)) %>%
+  ggplot() +
+  geom_point(mapping = aes(x = bill_length_mm, 
+                           y = bill_depth_mm,
+                           color = species,
+                           shape = sex)) +
+  geom_smooth(mapping = aes(x = bill_length_mm,
+                            y = bill_depth_mm,
+                            color = species),
+              method = "lm") +
+  facet_grid(island ~ sex, scales = "free") +
+  labs(title = "Bill depth and Bill Lengths by Species and Sex",
+       x = "Bill Length (mm)",
+       y = "Bill depth(mm)") +
+  theme_light()
+```
+
+```{r}
+penguins %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = bill_length_mm, y = species)) +
+  labs(title = "Bill Length by Species",
+       x = "Bill Length (mm)",
+       y = "")
+```
+
+Final Question
+
+-   Looking at the plot above, it seems like for Gentoo, average bill length seems like 45mm, for Adelie, average bill length is less than 45mm and for Chinstrap average bill length exceeds 45mm.

@@ -3,3 +3,68 @@ title: "Dog Breed"
 format: html
 ---
 
+```{r}
+breed_traits <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2022/2022-02-01/breed_traits.csv')
+trait_description <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2022/2022-02-01/trait_description.csv')
+breed_rank_all <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2022/2022-02-01/breed_rank.csv')
+
+
+```
+
+```{r}
+#install.packages("tidymodels")
+library(tidymodels)
+
+my_data_splits <- initial_split(breed_traits, prop = 0.5)
+
+exploratory_data <- training(my_data_splits)
+test_data <- testing(my_data_splits)
+```
+
+Hypothesis: Hunting dogs can be friendly and trained if trained properly like companion dogs.
+
+Below are the top 10 hunting and companion dogs we chose to compare:
+
+-   Hunting dogs
+
+    1.Labrador Retreiver
+
+    2.Shiba Inu
+
+    3.Pointers (German Wirehaired)
+
+    4.American Foxhounds
+
+    5.Spaniels (English Springer)
+
+    6.Black and Tan Coonhounds
+
+    7.Beagles
+
+    8.Brittanys
+
+    9.Norwegian Elkhounds
+
+    10.Spaniel (English Cocker)
+
+-   Companion dogs
+
+    1\. Bichons Frises
+
+    2.Bulldogs
+
+    3\. Dalmatians
+
+    4.Havanese
+
+    5\. Finnish Spitz
+
+    6.Poodles
+
+    7.Pugs
+
+    8.American Eskima Dogs
+
+    9.Boston Terriers
+
+    10.Chinese Crested

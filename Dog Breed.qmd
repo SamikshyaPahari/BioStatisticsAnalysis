@@ -31,33 +31,33 @@ Below are the top 10 hunting and companion dogs we chose to compare:
 
     2.Shiba Inu
 
-    3.Pointers (German Wirehaired)
+    3.Pointers (German Shorthaired)
 
-    4.Norwegian Lundehund
+    4\. American Foxhound
 
-    5.Spaniels (English Springer)
+    5\. English Springer Spaniels
 
-    6.Bull Terriers
+    6\. Black and Tan Coonhounds
 
-    7.Greyhounds
+    7\. Otterhounds
 
-    8.Otterhounds
+    8\. Border Terrier
 
-    9.Bloodhounds
+    9\. English Cocker Spaniels
 
-    10.Spaniel (English Cocker)
+    10.Bloodhounds
 
 -   Companion dogs
 
-    1\. Dalmatians
+    1\. Bichon Frises
 
-    2.Irish Terriers
+    2.Bulldogs
 
-    3\. Australian Shepherds
+    3\. Dalmatians
 
-    4.Alaskan Malamute
+    4.Havanese
 
-    5.Poodles
+    5.Finnish Spitz
 
     6.American Eskima Dogs
 
@@ -77,16 +77,16 @@ Introduction:
 
 Dogs are the domestic mammal from the family Canidae and order Carnivora which is related to foxes and jackals. For more than 12,000 years dogs have been on the side of humans as a friend, protector, herding dogs or hunting companion. Humans have also modified or genetically engineered dogs according to the characteristics they want in the dog. (Britannica). According to Fédération Cynologique Internationale (FCI), 339 breeds of dogs are recognized internationally which are divided into 10 groups depending on the dog’s purpose or their appearance among which includes companion and hunting dogs. (Coren, 2013)
 
-Companion dogs are trained differently depending on their living environment; they are trained to be friendlier, more devoted, easier to talk to, and more convenient to have around the house. Dalmatians, Irish Terriers, Australian Shepherds, Alaskan Malamute, Poodles, American Eskima Dogs, Boston Terriers, Chinese Crested, Border Collies, Boxers are the companion dogs selected for this data. These dogs are well recognized for being friendly, intelligent, and simple to teach. They make wonderful home pets and companions for children. 
+Companion dogs are trained differently depending on their living environment; they are trained to be friendlier, more devoted, easier to talk to, and more convenient to have around the house. Bichon Frises, Bulldog, Dalmatian, Havanese, Finnish Spitz, American Eskimo Dog, Boston Terrier, Chinese Crested, Border Collies, and Boxers are the companion dogs selected for this data. These dogs are well recognized for being friendly, intelligent, and simple to teach. They make wonderful home pets and companions for children. 
 
-On the other hand, hunting dogs may share similar characteristics, but they require additional training in an outside setting. They often need special diets to help them construct their bodies in a certain way, and they need to be trained to be fast, strong, and adaptable. Labrador Retreiver, Shiba Inu, Pointers (German Wirehaired), Norwegian Lundehund, Spaniels (English Springer), Bull Terriers, Greyhounds, Otterhounds, Bloodhounds, Spaniel (English Cocker) are the hunting dogs selected for this data. These dogs were selected based on their hunting abilities, such as their ability to hunt small or large animals, birds, or their senses that aid in the hunter's ability to locate its prey more quickly. They are often taught according to the hunter's requirements. 
+On the other hand, hunting dogs may share similar characteristics, but they require additional training in an outside setting. They often need special diets to help them construct their bodies in a certain way, and they need to be trained to be fast, strong, and adaptable. Labrador Retreiver, Shiba Inu, Pointers (German Wirehaired), American Foxhound, Spaniels (English Springer), Black and Tan Coonhounds, Otterhounds, Border Terrier, Bloodhounds, and Spaniel (English Cocker) are the hunting dogs selected for this data. These dogs were selected based on their hunting abilities, such as their ability to hunt small or large animals, birds, or their senses that aid in the hunter's ability to locate its prey more quickly. They are often taught according to the hunter's requirements. 
 
 Exploratory Data:
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select('breed', 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (54, 7, 96, 42, 8,80,2,25,9) %>%
+  slice (1,43,9,192,26,127,176,97,47,46) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = adaptability_level, y = breed)) +
@@ -97,9 +97,9 @@ exploratory_data %>%
 ```
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select(breed, 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (88,34,4,69,19,38,79,11,48,10) %>%
+  slice (45,5,51,24,187,119,21,79,32,14) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = adaptability_level, y = breed)) +
@@ -109,9 +109,9 @@ exploratory_data %>%
 ```
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select('breed', 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (54, 7, 96, 42, 8,80,2,25,9) %>%
+  slice (1,43,9,192,26,127,176,97,47,46) %>%
   
   ggplot() +
   geom_point(mapping = aes(x = adaptability_level, y = trainability_level)) +
@@ -121,9 +121,9 @@ exploratory_data %>%
 ```
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select(breed, 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (88,34,4,69,19,38,79,11,48,10) %>%
+  slice (45,5,51,24,187,119,21,79,32,14) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = adaptability_level, y = trainability_level)) +
@@ -132,12 +132,12 @@ exploratory_data %>%
        y = "Trainability Level")
 ```
 
-Looking at the data above on adaptability level and trainability level of hunting and companion dogs, hunting dogs are pretty much adaptable as companion dogs with the average compatibility level being around 4 out of 5. As for the trainability level, it is pretty much the same as companion dog. This means that hunting dogs can be pretty much adapt and be trained well.
+Looking at the data above on adaptability level and trainability level of hunting and companion dogs, hunting dogs are pretty much adaptable as companion dogs with the average compatibility level being around 4 out of 5. As for the trainability level, it looks like hunting dogs need more training than companion dogs since trainability level for companion dogs are much higher than hunting dogs.
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select('breed', 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (54, 7, 96, 42, 8,80,2,25,9) %>%
+  slice (1,43,9,192,26,127,176,97,47,46) %>%
   
   ggplot() +
   geom_point(mapping = aes(x = affectionate_with_family, y = good_with_young_children)) +
@@ -147,9 +147,9 @@ exploratory_data %>%
 ```
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select(breed, 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (88,34,4,69,19,38,79,11,48,10) %>%
+  slice (45,5,51,24,187,119,21,79,32,14) %>%
 
    ggplot() +
   geom_point(mapping = aes(x = affectionate_with_family, y = good_with_young_children)) +
@@ -161,9 +161,9 @@ exploratory_data %>%
 For both hunting and companion dog, the affectionate level with both family and children are pretty much the same with the average being 4.0.
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select('breed', 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (54, 7, 96, 42, 8,80,2,25,9) %>%
+  slice (1,43,9,192,26,127,176,97,47,46) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = openness_to_strangers, y = breed)) +
@@ -173,9 +173,9 @@ exploratory_data %>%
 ```
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select(breed, 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (88,34,4,69,19,38,79,11,48,10) %>%
+  slice (45,5,51,24,187,119,21,79,32,14) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = openness_to_strangers, y = breed)) +
@@ -184,12 +184,12 @@ exploratory_data %>%
        y = "")
 ```
 
-For hunting dogs, the level for openness to stranger seems higher than the companion dogs.
+For companion dogs, the level for openness to stranger seems higher than the hunting dogs.
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select('breed', 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (54, 7, 96, 42, 8,80,2,25,9) %>%
+  slice (1,43,9,192,26,127,176,97,47,46) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = playfulness_level, y = breed)) +
@@ -199,9 +199,9 @@ exploratory_data %>%
 ```
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select(breed, 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (88,34,4,69,19,38,79,11,48,10) %>%
+  slice (45,5,51,24,187,119,21,79,32,14) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = playfulness_level, y = breed)) +
@@ -210,12 +210,12 @@ exploratory_data %>%
        y = "")
 ```
 
-From the data above, companion dogs looks more playful than the hunting dogs.
+From the data above, companion dogs are more playful than the hunting dogs.
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select('breed', 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (54, 7, 96, 42, 8,80,2,25,9) %>%
+  slice (1,43,9,192,26,127,176,97,47,46) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = watchdog_protective_nature, y = breed)) +
@@ -225,9 +225,9 @@ exploratory_data %>%
 ```
 
 ```{r}
-exploratory_data %>%
+breed_traits %>%
   select(breed, 'affectionate_with_family', 'good_with_young_children', 'openness_to_strangers', 'playfulness_level', 'watchdog_protective_nature', 'adaptability_level', 'trainability_level') %>%
-  slice (88,34,4,69,19,38,79,11,48,10) %>%
+  slice (45,5,51,24,187,119,21,79,32,14) %>%
 
   ggplot() +
   geom_point(mapping = aes(x = watchdog_protective_nature, y = breed)) +
@@ -236,12 +236,16 @@ exploratory_data %>%
        y = "")
 ```
 
-Looking at all the data from above, hunting dogs seems as equally as adaptable, trainable, and welcoming as companion dogs. Hunting dogs seems to be more open to strangers than companion dogs as well. Looking at the data that shows protective nature of companion dog vs hunting dog, hunting dogs are more protective in nature. This seems to point that hunting dogs are also energetic and fierce in nature. So, this support our hypothesis that hunting dog can be as adaptable and trainable as dogs bred for being a companion.
+As for the protective nature, both companion and hunting dogs seems to have similar level for protective nature.
+
+Since most of the dogs that were chosen are now adapted to be a house pet rather than used for hunting as they were to breed, most of them seems as equally adaptable, trainable and welcoming as companion dogs. Except for some dogs like Shiba Inu, and Bloodhounds, other all hunting dogs seems pretty much similar to companion dogs. As for the playfulness nature, companion dogs are more playful in nature than hunting dogs which can be reasonable since hunting dogs were primarily breed to be more alert in nature.
+
+So looking at the data, this support our hypothesis that hunting dog can be as adaptable and trainable as dogs bred for being a companion.
 
 ```{r}
 #install.packages("janitor")
 library(janitor)
-names(exploratory_data) <- janitor::make_clean_names(names(exploratory_data))
+names(breed_traits) <- janitor::make_clean_names(names(exploratory_data))
 ```
 
 ```{r}

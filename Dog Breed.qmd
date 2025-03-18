@@ -89,7 +89,7 @@ On the other hand, hunting dogs may share similar characteristics, but they requ
 
 # Methodology
 
-Since exploratory data randomly chooses and filter out dog breed from the whole data set, some of the dogs that we chose were missing during exploratory analysis. So we used breed_traits that shows the whole dog data set and by using ggplot() we visualized the data so that we can compare different personalities of hunting dogs and companion dogs. We mostly used geom_point to visualize the data that plots the data using point.
+Since exploratory data randomly chooses and filter out dog breed from the whole data set, some of the dogs that we chose were missing during exploratory analysis. So we used breed_traits that shows the whole dog data set and by using ggplot() we visualized the data so that we can compare different personalities of hunting dogs and companion dogs. We mostly used geom_point to visualize the data that plots the data by creating scatterplot.
 
 Throughout the whole project, we are using following function to visualize our data.
 
@@ -260,7 +260,9 @@ breed_traits %>%
 
 -   As for the playfulness nature, companion dogs are more playful in nature than hunting dogs which can be reasonable since hunting dogs were primarily breed to be more alert in nature.
 
-Since most of the dogs that were chosen are now adapted to be a house pet rather than used for hunting as they were to breed, most of them seems as equally adaptable, trainable and welcoming as companion dogs. Except for some dogs like Shiba Inu, and Bloodhounds, other all hunting dogs seems pretty much similar to companion dogs. But even with different personalities both hunting and companion dogs has so many similar traits like both of them being equally affectionate with family and young children, both of them being equally adaptable and trainable. So looking at the data, this support our hypothesis that hunting dog can be as adaptable and trainable as dogs bred for being a companion.
+# Conclusion
+
+Since most of the dogs that were chosen are now adapted to be a house pet rather than used for hunting as they were to breed, most of them seems as equally adaptable, trainable and welcoming as companion dogs. Except for some dogs like Shiba Inu, and Bloodhounds, other all hunting dogs seems pretty much similar to companion dogs. But even with different personalities both hunting and companion dogs has so many similar traits like both of them being equally affectionate with family and young children, and both of them being equally adaptable and trainable. So looking at the data, this support our hypothesis that hunting dog can be as adaptable, friendly and trainable as dogs bred for being a companion.
 
 ```{r}
 #install.packages("janitor")

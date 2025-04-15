@@ -12,6 +12,12 @@ breed_rank_all <- readr::read_csv('https://raw.githubusercontent.com/rfordatasci
 ```
 
 ```{r}
+#install.packages("janitor")
+library(janitor)
+names(breed_traits) <- janitor::make_clean_names(names(breed_traits))
+```
+
+```{r}
 #install.packages("tidymodels")
 library(tidymodels)
 
@@ -263,15 +269,3 @@ breed_traits %>%
 # Conclusion
 
 Since most of the dogs that were chosen are now adapted to be a house pet rather than used for hunting as they were to breed, most of them seems as equally adaptable, trainable and welcoming as companion dogs. Except for some dogs like Shiba Inu, and Bloodhounds, other all hunting dogs seems pretty much similar to companion dogs. But even with different personalities both hunting and companion dogs has so many similar traits like both of them being equally affectionate with family and young children, and both of them being equally adaptable and trainable. So looking at the data, this support our hypothesis that hunting dog can be as adaptable, friendly and trainable as dogs bred for being a companion.
-
-```{r}
-#install.packages("janitor")
-library(janitor)
-names(breed_traits) <- janitor::make_clean_names(names(exploratory_data))
-```
-
-```{r}
-#install.packages("janitor")
-library(janitor)
-names(test_data) <- janitor::make_clean_names(names(test_data))
-```
